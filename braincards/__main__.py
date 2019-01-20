@@ -5,6 +5,7 @@ import sys
 from .braincards import run as run_braincards
 
 FILE_NAME = "img_files.json"
+HELP_MSG = "braincards (HELP)"
 
 
 def get_img_files():
@@ -18,6 +19,8 @@ def write_img_files(img_files):
 
 
 def add_img(img_type, img_file):
+    if not os.path.exists(img_file):
+        sys.exit("braincards: File not found: {}".format(img_file))
     try:
         img_files = get_img_files()
     except FileNotFoundError:
@@ -29,8 +32,10 @@ def add_img(img_type, img_file):
     write_img_files(img_files)
 
 
-def clear_img(img_type="all"):
-    if img_type == "all":
+def clear_img(img_type):
+    if not os.path.exists(FILE_NAME):
+        return
+    if not img_type:
         os.remove(FILE_NAME)
     else:
         img_files = get_img_files()
@@ -40,21 +45,40 @@ def clear_img(img_type="all"):
 
 correct_command = {
     "source": "src",
-    "input": "inp"
+    "input": "inp",
+    "clear": "clr",
+    "execute": "run",
+    "start": "run",
 }
 
 
 def main():
-    command = sys.argv[1].lower()
+    try:
+        command = sys.argv[1].lower()
+    except IndexError:
+        sys.exit(HELP_MSG)
     command = correct_command.get(command, command)
     if command in ("src", "inp"):
         add_img(command, sys.argv[2])
-    elif command in ("clear", "clr"):
+    elif command == "clr":
         clear_img(sys.argv[2:])
-    elif command in ("run", "execute", "start"):
+    elif command == "run":
         img_files = get_img_files()
         clear_img()
         run_braincards(**img_files)
+    elif command == "quick":
+        src_img = sys.argv[2]
+        if not os.path.exists(src_img):
+            sys.exit("braincards: File not found: {}".format(src_img))
+        src_img = [src_img]
+        try:
+            input_img = [sys.argv[3]]
+        except IndexError:
+            input_img = None
+        img_files = {"src": src_img, "inp": input_img}
+        run_braincards(**img_files)
+    else:
+        print("braincards: Invalid command: {}".format(command))
 
 
 if __name__ == "__main__":
