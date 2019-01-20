@@ -2,7 +2,7 @@ import json
 import os
 import sys
 
-import braincards
+from .braincards import run as run_braincards
 
 FILE_NAME = "img_files.json"
 
@@ -54,7 +54,7 @@ def main():
     elif command in ("run", "execute", "start"):
         img_files = get_img_files()
         clear_img()
-        braincards.run(**img_files)
+        run_braincards(**img_files)
 
 
 if __name__ == "__main__":

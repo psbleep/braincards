@@ -16,7 +16,7 @@ setuptools.setup(
     url="https://github.com/psbleep/braincards",
     packages=setuptools.find_packages(),
     entry_points={
-        "console_scripts": ["braincards=braincards/__main__:main"]
+        "console_scripts": ["braincards=braincards.__main__:main"]
     },
     classifiers=[
         "Programming Language :: Python :: 3",
