@@ -32,7 +32,7 @@ def add_img(img_type, img_file):
     write_img_files(img_files)
 
 
-def clear_img(img_type):
+def clear_img(img_type=None):
     if not os.path.exists(FILE_NAME):
         return
     if not img_type:
