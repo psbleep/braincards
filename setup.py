@@ -15,12 +15,23 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/psbleep/braincards",
     packages=setuptools.find_packages(),
+    include_package_data=True,
+    python_requires=">=3",
+    install_requires=[
+        "bfi==1.0.2",
+        "Pillow==5.4.1",
+    ],
     entry_points={
         "console_scripts": ["braincards=braincards.__main__:main"]
     },
+    license="GPLv3",
     classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Environment :: Console",
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: GPLv3",
-        "Operating System :: OS Independent",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Operating System :: POSIX",
+        "Intended Audience :: Developers",
+        "Topic :: Software Development",
     ],
 )
