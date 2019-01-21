@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="braincards",
-    version="0.0.1",
+    version="0.0.2",
     author="Patrick Schneeweis",
     author_email="psbleep@protonmail.com",
     description="Punchcards-inspired Brainfuck implementation.",
