@@ -64,7 +64,6 @@ def get_pixel_binary(pixel):
 def execute(src_code, input_stream=""):
     output = bfi.interpret(
         src_code, input_data=input_stream, buffer_output=True)
-    print(output)
     return output
 
 

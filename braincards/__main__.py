@@ -65,7 +65,7 @@ def main():
     elif command == "run":
         img_files = get_img_files()
         clear_img()
-        run_braincards(**img_files)
+        print(run_braincards(**img_files))
     elif command == "quick":
         src_img = sys.argv[2]
         if not os.path.exists(src_img):
@@ -76,7 +76,7 @@ def main():
         except IndexError:
             input_img = None
         img_files = {"src": src_img, "inp": input_img}
-        run_braincards(**img_files)
+        print(run_braincards(**img_files))
     else:
         print("braincards: Invalid command: {}".format(command))
 

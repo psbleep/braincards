@@ -20,6 +20,8 @@ setuptools.setup(
     install_requires=[
         "bfi==1.0.2",
         "Pillow==5.4.1",
+        "RPi.GPIO==0.6.5",
+        "picamera==1.13"
     ],
     entry_points={
         "console_scripts": ["braincards=braincards.__main__:main"]
