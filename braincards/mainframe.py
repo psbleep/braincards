@@ -6,7 +6,7 @@ from time import sleep
 from PIL import Image
 from picamera import PiCamera
 
-from braincards import run as run_braincards
+from .braincards import run as run_braincards
 
 
 SRC_IMG_PIN = 12
@@ -29,7 +29,7 @@ GPIO.setup(INPUT_IMG_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 stream = BytesIO()
-camera = PiCamera()
+# camera = PiCamera()
 
 
 def take_img(card_type, braincard_images):

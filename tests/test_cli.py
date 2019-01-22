@@ -8,7 +8,9 @@ from copy import copy
 
 TEST_DIR = os.path.dirname(os.path.realpath(__file__))
 TEST_FILE = os.path.join(TEST_DIR, "test_img_files.json")
-TEST_DATA = {"src": ["/fake.img"], "img": ["/other/fake.img"]}
+TEST_SRC_FILE = os.path.join(TEST_DIR, "test_src.png")
+TEST_INP_FILE = os.path.join(TEST_DIR, "test_inp.png")
+TEST_DATA = {"src": [TEST_SRC_FILE], "img": [TEST_INP_FILE]}
 cli.FILE_NAME = TEST_FILE
 
 
@@ -40,18 +42,20 @@ class CLITests(unittest.TestCase):
         self.assertEqual(read_file(), new_data)
 
     def test_add_img_file_exists(self):
-        cli.add_img("src", "/new.img")
+        new_file_path = os.path.join(TEST_DIR, "test_src_with_input.png")
+        cli.add_img("src", new_file_path)
         new_src = copy(TEST_DATA["src"])
-        new_src.append("/new.img")
+        new_src.append(new_file_path)
         self.assertEqual(read_file()["src"], new_src)
 
     def test_add_img_file_does_not_exist(self):
+        new_file_path = os.path.join(TEST_DIR, "test_src_with_input.png")
         os.remove(TEST_FILE)
-        cli.add_img("src", "begin.img")
-        self.assertEqual(read_file(), {"src": ["begin.img"]})
+        cli.add_img("src", new_file_path)
+        self.assertEqual(read_file(), {"src": [new_file_path]})
 
     def test_clear_img_all(self):
-        cli.clear_img(img_type="all")
+        cli.clear_img()
         self.assertFalse(os.path.exists(TEST_FILE))
 
     def test_clear_img_clears_type(self):
