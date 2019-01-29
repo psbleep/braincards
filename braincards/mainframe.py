@@ -1,3 +1,4 @@
+import os
 import RPi.GPIO as GPIO
 
 from io import BytesIO
@@ -8,6 +9,8 @@ from picamera import PiCamera
 
 from .braincards import run as run_braincards
 
+PRINTER_NAME = "HP_OfficeJet_Pro_8720"
+OUTPUT_FILE = "output.txt"
 
 SRC_IMG_PIN = 12
 INPUT_IMG_PIN = 14
@@ -29,11 +32,10 @@ GPIO.setup(INPUT_IMG_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 stream = BytesIO()
-# camera = PiCamera()
+camera = PiCamera()
 
 
 def take_img(card_type, braincard_images):
-    camera.start_preview()
     sleep(2)
     camera.capture(stream, "jpeg")
     stream.seek(0)
@@ -58,6 +60,10 @@ def main():
         if run_code:
             result = run_braincards(**braincard_images)
             print(result)
+            with open(OUTPUT_FILE, "w") as f:
+                f.write(result)
+            os.system("lp -d {} {}".format(PRINTER_NAME, OUTPUT_FILE))
+            os.remove(OUTPUT_FILE)
             braincard_images = {"src": [], "inp": []}
 
 
