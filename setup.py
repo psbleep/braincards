@@ -19,7 +19,7 @@ setuptools.setup(
     python_requires=">=3",
     install_requires=[
         "bfi==1.0.2",
-        "Pillow==5.4.1",
+        "Pillow==6.2.0",
         "RPi.GPIO==0.6.5",
         "picamera==1.13"
     ],
