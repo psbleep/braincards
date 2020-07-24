@@ -1,5 +1,5 @@
 bfi==1.0.2
-Pillow==5.4.1
+Pillow==6.2.0
 pytest==4.1.1
 RPi.GPIO==0.6.5
 picamera==1.13
